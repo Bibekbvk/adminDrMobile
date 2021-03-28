@@ -1,11 +1,13 @@
 import 'package:drmobileadmin/Menu/insertstaff.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/Staff.dart';
+import 'package:drmobileadmin/module/medicalItem.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'constant.dart';
+import 'module/volinteer.dart';
 class DatabaseService {
   
        Future<String> insertSexEducation(String topic, String article1, String date, String image1, String article2, image2) async {
@@ -63,6 +65,22 @@ class DatabaseService {
         //var encodeProduct_id = Uri.encodeComponent(product_id);
         var data = await http.get(
           "$BASE_URL/api/insertstaff?S_ID=${ID}&Name=${name}&staff_type=${staffType}&location=${location}&fee=${fee}&reg_no${reg_no}&photo=${photo}",
+        );
+        print(data.body);
+        var jsonData = json.decode((data.body));
+        String val = jsonData["error"];
+        if (val == null) {
+          val = "";
+        }
+        print(val);
+        return val;
+      }
+
+       Future<String> insertVolunteer(String ID, String name, String location, String contact, String type, String details, String email, String image) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/insertVolunteer?V_ID=${ID}&name=${name}&location=${location}&contact=${contact}&type=${type}&details=${details}&email=${email}&image=${image}",
         );
         print(data.body);
         var jsonData = json.decode((data.body));
@@ -132,6 +150,60 @@ class DatabaseService {
     return medicines;
   }
 
+   Future<List<MedicalItem>> medical() async {
+    var data = await http.get(
+      "$BASE_URL/api/medical",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<MedicalItem> medicals = [];
+    for (var each in jsonData) {
+      MedicalItem medicalDetails = MedicalItem(
+        itm_id: each['itm_id'],
+        name: each['name'],
+        otherName: each['otherName'],
+        company: each['company'],
+        price: each['price'],
+        quantity: each['quantity'],
+         description: each['description'],
+         tags: each['tags'],
+         images: each['images']
+      );
+      medicals.add(medicalDetails);
+    }
+    return medicals;
+  }
+
+
+
+
+
+     Future<List<Volunteer>> volunteer() async {
+        var data = await http.get(
+          "$BASE_URL/api/volunteer",
+        );
+    
+        var jsonData = json.decode((data.body));
+    
+        List<Volunteer> volunteer = [];
+        for (var each in jsonData) {
+          Volunteer vlDetails = Volunteer(
+            V_ID: each['V_ID'],
+            name: each['name'],
+            location: each['location'],
+            contact: each['contact'],
+            details: each['details'],
+            email: each['email'],
+            image: each['image'],
+           
+          );
+          volunteer.add(vlDetails);
+        }
+        return volunteer;
+      }
+
+      
    Future<List<Staffs>> staff() async {
     var data = await http.get(
       "$BASE_URL/api/staff",
