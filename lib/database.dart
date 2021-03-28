@@ -1,4 +1,6 @@
 import 'package:drmobileadmin/Menu/insertstaff.dart';
+import 'package:drmobileadmin/module/Medicine.dart';
+import 'package:drmobileadmin/module/Staff.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -105,9 +107,53 @@ class DatabaseService {
       }
 
 
+    Future<List<Medicine>> medicine() async {
+    var data = await http.get(
+      "$BASE_URL/api/medicine",
+    );
 
+    var jsonData = json.decode((data.body));
 
+    List<Medicine> medicines = [];
+    for (var each in jsonData) {
+      Medicine medicineDetails = Medicine(
+        med_id: each['med_id'],
+        brand_name: each['brand_name'],
+        generic_name: each['generic_name'],
+        company: each['company'],
+        price: each['price'],
+        quantity: each['quantity'],
+         description: each['description'],
+         tags: each['tags'],
+         images: each['images']
+      );
+      medicines.add(medicineDetails);
+    }
+    return medicines;
+  }
 
+   Future<List<Staffs>> staff() async {
+    var data = await http.get(
+      "$BASE_URL/api/staff",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Staffs> staffs = [];
+    for (var each in jsonData) {
+      Staffs staffsList = Staffs(
+        staff_id: each['staff_id'],
+        name: each['name'],
+        staff_type: each['staff_type'],
+        location: each['location'],
+        fee: each['fee'],
+        reg_no: each['reg_no'],
+         photo: each['photo'],
+      );
+      staffs.add(staffsList);
+    }
+    return staffs;
+  }
 
     }
     

@@ -1,3 +1,5 @@
+import 'package:drmobileadmin/Menu/editUpdateMedicine.dart';
+import 'package:drmobileadmin/Menu/editUpdateStaff.dart';
 import 'package:drmobileadmin/Menu/insertemergency.dart';
 import 'package:drmobileadmin/Menu/inserthelp.dart';
 import 'package:drmobileadmin/Menu/insertstaff.dart';
@@ -216,7 +218,7 @@ class _homeState extends State<home> {
 
               RaisedButton(
              onPressed: (){
-
+               Navigator.push(context, MaterialPageRoute( builder: (context)=>staffListPage()));
 
              },
              child: Text("view/ Update / delete Staff")
@@ -225,6 +227,7 @@ class _homeState extends State<home> {
 
              RaisedButton(
              onPressed: (){
+              Navigator.push(context, MaterialPageRoute( builder: (context)=>medicineList()));
 
 
              },
@@ -234,7 +237,7 @@ class _homeState extends State<home> {
 
               RaisedButton(
              onPressed: (){
-
+             
 
              },
              child: Text("view/ Update / delete medical item")

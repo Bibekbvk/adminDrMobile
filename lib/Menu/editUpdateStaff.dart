@@ -1,21 +1,22 @@
+
 import 'package:drmobileadmin/database.dart';
-import 'package:drmobileadmin/module/Medicine.dart';
+import 'package:drmobileadmin/module/Staff.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 
-
-class medicineList extends StatefulWidget {
+class staffListPage extends StatefulWidget {
   @override
   
 
-  
+  staffListPage();
 
-  _medicineListState createState() => _medicineListState();
+  _staffListPageState createState() => _staffListPageState();
 }
 
-class _medicineListState extends State<medicineList> {
+class _staffListPageState extends State<staffListPage> {
   DatabaseService db = DatabaseService();
-  List<Medicine> medList = new List();
+  List<Staffs> staffList = new List();
   ScrollController _scrollController = new ScrollController();
 
 
@@ -36,7 +37,7 @@ class _medicineListState extends State<medicineList> {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
-          offset = medList.length;
+          offset = staffList.length;
           fetch(offset);
         }
 
@@ -56,23 +57,17 @@ class _medicineListState extends State<medicineList> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-      //  leading: TextField(
-
-      //  ),
-
-       ),
+      appBar: AppBar(),
       body: ListView.builder(
         controller: _scrollController,
-        itemCount: medList.length,
+        itemCount: staffList.length,
         itemBuilder: (BuildContext context, int index) {
-        
          return Container(
-           
            padding: EdgeInsets.all(10),
            color: Colors.black54,
             child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceEvenly,        
+             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
              
                 Column(
@@ -87,19 +82,17 @@ class _medicineListState extends State<medicineList> {
                   border:Border.all(color: Colors.green, width: 4),
                   borderRadius: BorderRadius.circular(22)
                   ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    child: Image.network(medList[index].images,  fit: BoxFit.cover ))
+                  child: Image.network(staffList[index].photo,  fit: BoxFit.fill )
                ),
                Container(
                  width:100,
-                  child:Text("${medList[index].brand_name}", style: TextStyle(
+                  child:Text("${staffList[index].name}", style: TextStyle(
                     fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
                   ),),
                ),
                   Container(
                      width:70,
-                     child:Text("${medList[index].company}", style: TextStyle(
+                     child:Text("${staffList[index].staff_type}", style: TextStyle(
                     fontSize: 8, color:Colors.lightGreen, fontWeight:FontWeight.w800
                   ),),
                   )
@@ -116,17 +109,17 @@ class _medicineListState extends State<medicineList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${medList[index].brand_name}"),
-                            Text("Fees/day:${medList[index].price}"),
-                            Text("Location:${medList[index].company}"),
+                            Text("Name:${staffList[index].reg_no}"),
+                            Text("Fees/day:${staffList[index].fee}"),
+                            Text("Location:${staffList[index].location}"),
                          
                          Container(
                            child: RaisedButton(
-                             child:Text("Buy"),
+                             child:Text("Invite"),
                              color: Colors.orange,
                              onPressed: (){
 
-                               print("Name:${medList[index].generic_name}");
+                               print("Name:${staffList[index].reg_no}");
                              },
                            ),
                          ),
@@ -161,18 +154,18 @@ class _medicineListState extends State<medicineList> {
 
   }
 
-  fetch(int offset) async {
+  fetch( int offset) async {
     print("in fetch");
 
-    var data = await db.medicine();
+    var data = await db.staff();
     currentDataLength = data.length;
     print("below data");
 
     print("out of loop");
 
     setState(() {
-      for (Medicine p in data) {
-        medList.add(p);
+      for (Staffs p in data) {
+        staffList.add(p);
       }
     });
   }
