@@ -115,7 +115,7 @@ class _staffListPageState extends State<staffListPage> {
                          
                          Container(
                            child: RaisedButton(
-                             child:Text("Invite"),
+                             child:Text("Edit"),
                              color: Colors.orange,
                              onPressed: (){
 
@@ -123,6 +123,28 @@ class _staffListPageState extends State<staffListPage> {
                              },
                            ),
                          ),
+                            
+
+                                    Container(
+                           child: RaisedButton(
+                             child:Text("Delete"),
+                             color: Colors.orange,
+                            
+
+                                              onPressed: () async {
+                   
+                      var res = await db.deletestaff(staffList[index].staff_id
+                          );
+                    
+                  
+                             },
+                           ),
+                         ),
+
+                     
+
+
+
                              Divider(
                                color: Colors.greenAccent,
                                height: 2,

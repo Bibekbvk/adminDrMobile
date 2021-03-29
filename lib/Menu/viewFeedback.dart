@@ -1,22 +1,22 @@
 import 'package:drmobileadmin/database.dart';
+import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
-import 'package:drmobileadmin/module/medicalItem.dart';
 import 'package:flutter/material.dart';
 
 
 
-class medicalItemList extends StatefulWidget {
+class feedbackPage extends StatefulWidget {
   @override
   
 
   
 
-  _medicalItemListState createState() => _medicalItemListState();
+  _feedbackPageState createState() => _feedbackPageState();
 }
 
-class _medicalItemListState extends State<medicalItemList> {
+class _feedbackPageState extends State<feedbackPage> {
   DatabaseService db = DatabaseService();
-  List<MedicalItem> medicalItemList = new List();
+  List<Feedbacks> feedbackList = new List();
   ScrollController _scrollController = new ScrollController();
 
 
@@ -37,7 +37,7 @@ class _medicalItemListState extends State<medicalItemList> {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
-          offset = medicalItemList.length;
+          offset = feedbackList.length;
           fetch(offset);
         }
 
@@ -65,7 +65,7 @@ class _medicalItemListState extends State<medicalItemList> {
        ),
       body: ListView.builder(
         controller: _scrollController,
-        itemCount: medicalItemList.length,
+        itemCount: feedbackList.length,
         itemBuilder: (BuildContext context, int index) {
         
          return Container(
@@ -90,17 +90,12 @@ class _medicalItemListState extends State<medicalItemList> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.all(Radius.circular(10)),
-                    child: Image.network(medicalItemList[index].images,  fit: BoxFit.cover ))
+                    child: Image.network(feedbackList[index].Name,  fit: BoxFit.cover ))
                ),
-               Container(
-                 width:100,
-                  child:Text("${medicalItemList[index].name}", style: TextStyle(
-                    fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
-                  ),),
-               ),
+             
                   Container(
                      width:70,
-                     child:Text("${medicalItemList[index].quantity}", style: TextStyle(
+                     child:Text("${feedbackList[index].feedback}", style: TextStyle(
                     fontSize: 8, color:Colors.lightGreen, fontWeight:FontWeight.w800
                   ),),
                   )
@@ -117,21 +112,35 @@ class _medicalItemListState extends State<medicalItemList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${medicalItemList[index].otherName}"),
-                            Text("Fees/day:${medicalItemList[index].price}"),
-                            Text("Location:${medicalItemList[index].company}"),
+                            Text("Name:${feedbackList[index].UID}"),
+                            Text("Fees/day:${feedbackList[index].contact}"),
+                            Text("Location:${feedbackList[index].Name}"),
                          
-                         Container(
+                        
+
+                           Container(
                            child: RaisedButton(
                              child:Text("Delete"),
                              color: Colors.orange,
-                                                       onPressed: () async {
+                               onPressed: () async {
                    
-                      var res = await db.deleteMedicalItems(medicalItemList[index].itm_id
+                      var res = await db.deleteFeedback(feedbackList[index].UID
                           );
                     
-                  
-                             },
+                  }
+                           ),
+                         ),
+
+
+                           Container(
+                           child: RaisedButton(
+                             child:Text("Update"),
+                             color: Colors.orange,
+                               onPressed: () async {
+                   
+                   
+                    
+                  }
                            ),
                          ),
                              Divider(
@@ -168,15 +177,15 @@ class _medicalItemListState extends State<medicalItemList> {
   fetch(int offset) async {
     print("in fetch");
 
-    var data = await db.medical();
+    var data = await db.feedbacks();
     currentDataLength = data.length;
     print("below data");
 
     print("out of loop");
 
     setState(() {
-      for (MedicalItem p in data) {
-        medicalItemList.add(p);
+      for (Feedbacks p in data) {
+        feedbackList.add(p);
       }
     });
   }

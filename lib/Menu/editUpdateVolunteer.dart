@@ -120,12 +120,14 @@ class _volunteerState extends State<volunteer> {
                          
                          Container(
                            child: RaisedButton(
-                             child:Text("Buy"),
+                             child:Text("Delete"),
                              color: Colors.orange,
-                             onPressed: (){
-
-                               print("Name:${volunteerList[index].email}");
-                             },
+                                        onPressed: () async {
+                   
+                      var res = await db.deleteVolunteer(volunteerList[index].V_ID
+                          );
+                    
+                  }
                            ),
                          ),
                              Divider(

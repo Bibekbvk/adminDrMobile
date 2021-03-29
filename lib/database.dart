@@ -1,4 +1,5 @@
 import 'package:drmobileadmin/Menu/insertstaff.dart';
+import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/Staff.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
@@ -124,6 +125,56 @@ class DatabaseService {
         return val;
       }
 
+       Future<int> deleteMedicine(String id) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/deleteMedicine?med_id=${id}",
+        );
+        return data.statusCode;
+      }
+
+
+
+
+   Future<int> deleteFeedback(String id) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/deleteFeedback?UID=${id}",
+        );
+        return data.statusCode;
+      }
+
+         Future<int> deletestaff(String id) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/deletestaff?staff_id=${id}",
+        );
+        return data.statusCode;
+      }
+
+       Future<int> deleteMedicalItems(String id) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/deletemedicalitem?itm_id=${id}",
+        );
+        return data.statusCode;
+      }
+
+          Future<int> deleteVolunteer(String id) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/deletevolunteer?V_ID=${id}",
+        );
+        return data.statusCode;
+      }
+
+
+
 
     Future<List<Medicine>> medicine() async {
     var data = await http.get(
@@ -149,6 +200,37 @@ class DatabaseService {
     }
     return medicines;
   }
+
+    Future<List<Feedbacks>> feedbacks() async {
+    var data = await http.get(
+      "$BASE_URL/api/feedbacks",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Feedbacks> feedbacksList = [];
+    for (var each in jsonData) {
+      Feedbacks feedbackDetails = Feedbacks(
+        UID: each['UID'],
+        Name: each['Name'],
+        feedback: each['feedback'],
+  
+      );
+      feedbacksList.add(feedbackDetails);
+    }
+    return feedbacksList;
+  }
+
+
+
+
+
+
+
+
+
+
+
 
    Future<List<MedicalItem>> medical() async {
     var data = await http.get(

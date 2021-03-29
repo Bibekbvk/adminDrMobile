@@ -120,14 +120,32 @@ class _medicineListState extends State<medicineList> {
                             Text("Fees/day:${medList[index].price}"),
                             Text("Location:${medList[index].company}"),
                          
-                         Container(
-                           child: RaisedButton(
-                             child:Text("Buy"),
-                             color: Colors.orange,
-                             onPressed: (){
+                        
 
-                               print("Name:${medList[index].generic_name}");
-                             },
+                           Container(
+                           child: RaisedButton(
+                             child:Text("Delete"),
+                             color: Colors.orange,
+                               onPressed: () async {
+                   
+                      var res = await db.deleteMedicine(medList[index].med_id
+                          );
+                    
+                  }
+                           ),
+                         ),
+
+
+                           Container(
+                           child: RaisedButton(
+                             child:Text("Update"),
+                             color: Colors.orange,
+                               onPressed: () async {
+                   
+                      var res = await db.deleteMedicine(medList[index].med_id
+                          );
+                    
+                  }
                            ),
                          ),
                              Divider(
