@@ -13,8 +13,7 @@ TextEditingController reg_no = new TextEditingController();
 TextEditingController stafftype = new TextEditingController();
 TextEditingController name = new TextEditingController();
 TextEditingController image = new TextEditingController();
-TextEditingController article2 = new TextEditingController();
-TextEditingController image2 = new TextEditingController();
+TextEditingController location = new TextEditingController();
 TextEditingController fee = new TextEditingController();
 
 
@@ -39,7 +38,7 @@ class _insertStaffState extends State<insertStaff> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: name,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "Name",
                       border: OutlineInputBorder(
@@ -51,7 +50,7 @@ class _insertStaffState extends State<insertStaff> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: stafftype,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "staff type",
                       border: OutlineInputBorder(
@@ -66,7 +65,7 @@ class _insertStaffState extends State<insertStaff> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: location,
-                  maxLines: 10,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "location",
                       border: OutlineInputBorder(
@@ -80,7 +79,7 @@ class _insertStaffState extends State<insertStaff> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: fee,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "Fee",
                       border: OutlineInputBorder(
@@ -91,8 +90,8 @@ class _insertStaffState extends State<insertStaff> {
               Container(
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
-                  controller: article2,
-                  maxLines: 10,
+                  controller: reg_no,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "Reg no",
                       border: OutlineInputBorder(
@@ -106,7 +105,7 @@ class _insertStaffState extends State<insertStaff> {
                   controller: image,
                   maxLines: 10,
                   decoration: InputDecoration(
-                      labelText: "image",
+                      labelText: "image link",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(11))),
                 ),
@@ -115,7 +114,7 @@ class _insertStaffState extends State<insertStaff> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '') {
+                    if (name.text == '' || stafftype.text == '' || reg_no.text == '' || location.text == '' || fee.text == '' || image.text == '') {
                       _showDialogEmptyinsertStaff();
                     } else {
                       var res = await db.insertstaff(
@@ -138,7 +137,7 @@ class _insertStaffState extends State<insertStaff> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "insertStaff is Empty",
+            "Some Fields are empty",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

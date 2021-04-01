@@ -1,5 +1,3 @@
-
-import 'package:drmobileadmin/Menu/insertemergency.dart';
 import 'package:drmobileadmin/database.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +38,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: brand_name,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "brand_name",
                       border: OutlineInputBorder(
@@ -52,7 +50,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: generic_name,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "generic name",
                       border: OutlineInputBorder(
@@ -67,7 +65,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: company,
-                  maxLines: 10,
+                  maxLines: 3,
                   decoration: InputDecoration(
                       labelText: "Company",
                       border: OutlineInputBorder(
@@ -83,7 +81,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: price,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "price",
                       border: OutlineInputBorder(
@@ -98,7 +96,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: quantity,
-                  maxLines: 10,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "quantity",
                       border: OutlineInputBorder(
@@ -116,7 +114,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: description,
-                  maxLines: 10,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "description",
                       border: OutlineInputBorder(
@@ -133,7 +131,7 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: tags,
-                  maxLines: 10,
+                  maxLines: 4,
                   decoration: InputDecoration(
                       labelText: "tags",
                       border: OutlineInputBorder(
@@ -145,9 +143,9 @@ class _insertMedicineState extends State<insertMedicine> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: images,
-                  maxLines: 10,
+                  maxLines: 5,
                   decoration: InputDecoration(
-                      labelText: "image",
+                      labelText: "image link",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(11))),
                 ),
@@ -156,7 +154,7 @@ class _insertMedicineState extends State<insertMedicine> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '') {
+                    if (brand_name.text == '' || generic_name.text == '' || company.text == '' || price.text == '' || quantity.text == '' || description.text == '' || tags.text == '' || images.text == '' ) {
                       _showDialogEmptyinsertMedicine();
                     } else {
                       var res = await db.insertMedicine(
@@ -179,7 +177,7 @@ class _insertMedicineState extends State<insertMedicine> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "insertMedicine is Empty",
+            "Some Fields are empty",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

@@ -37,7 +37,7 @@ class _insertEmergencyState extends State<insertEmergency> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: name,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "name",
                       border: OutlineInputBorder(
@@ -49,7 +49,7 @@ class _insertEmergencyState extends State<insertEmergency> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: contact1,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "contact1",
                       border: OutlineInputBorder(
@@ -64,7 +64,7 @@ class _insertEmergencyState extends State<insertEmergency> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: contact2,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "contact2",
                       border: OutlineInputBorder(
@@ -92,7 +92,7 @@ class _insertEmergencyState extends State<insertEmergency> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '') {
+                    if (name.text == '' || contact1.text == '' || contact2.text == '' || location.text == '') {
                       _showDialogEmptyinsertEmergency();
                     } else {
                       var res = await db.insertemergency("Bibek",
@@ -115,7 +115,7 @@ class _insertEmergencyState extends State<insertEmergency> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "insertEmergency is Empty",
+            "Some Fields Are empty",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

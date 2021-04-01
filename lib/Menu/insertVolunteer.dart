@@ -66,7 +66,7 @@ class _insert_VolunterState extends State<insert_Volunter> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: contact,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "contact",
                       border: OutlineInputBorder(
@@ -80,7 +80,7 @@ class _insert_VolunterState extends State<insert_Volunter> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: type,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "type",
                       border: OutlineInputBorder(
@@ -104,7 +104,7 @@ class _insert_VolunterState extends State<insert_Volunter> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: email,
-                  maxLines: 10,
+                  maxLines: 1,
                   decoration: InputDecoration(
                       labelText: "email",
                       border: OutlineInputBorder(
@@ -127,7 +127,7 @@ class _insert_VolunterState extends State<insert_Volunter> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '') {
+                    if (name.text == '' || location.text == '' || contact.text == '' || type.text == '' || details.text == '' || email.text == '' || image.text == '') {
                       _showDialogEmptyinsert_Volunter();
                     } else {
                       var res = await db.insertVolunteer(
@@ -150,7 +150,7 @@ class _insert_VolunterState extends State<insert_Volunter> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "insert_Volunter is Empty",
+            "Some Fields are empty",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

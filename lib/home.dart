@@ -7,6 +7,7 @@ import 'package:drmobileadmin/Menu/insertemergency.dart';
 import 'package:drmobileadmin/Menu/inserthelp.dart';
 import 'package:drmobileadmin/Menu/insertstaff.dart';
 import 'package:drmobileadmin/Menu/viewFeedback.dart';
+import 'package:drmobileadmin/Menu/viewStaffRegistration.dart';
 import 'package:flutter/material.dart';
 
 import 'Menu/insertMedicine.dart';
@@ -111,7 +112,7 @@ class _homeState extends State<home> {
               RaisedButton(
              onPressed: (){
 
-
+                  Navigator.push(context, MaterialPageRoute( builder: (context)=>viewStaffRegistration()));
              },
              child: Text("view staff/  \n volunteer Registration")
               

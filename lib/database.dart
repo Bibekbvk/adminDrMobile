@@ -3,6 +3,7 @@ import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/Staff.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
+import 'package:drmobileadmin/module/staffRegistration.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -10,6 +11,31 @@ import 'package:http/http.dart' as http;
 import 'constant.dart';
 import 'module/volinteer.dart';
 class DatabaseService {
+
+
+    Future<List<StaffsReg>> staffResgis() async {
+        var data = await http.get(
+          "$BASE_URL/api/ViewStaffRegistration",
+        );
+    
+        var jsonData = json.decode((data.body));
+        print(jsonData);
+        List<StaffsReg> abortion = [];
+        for (var each in jsonData) {
+          StaffsReg abDetails = StaffsReg(
+            U_id: each['U_id'],
+            image: each['image'],
+            image1: each['image1'],
+            image2: each['image2'],
+            description: each['description'],
+            
+           
+          );
+          abortion.add(abDetails);
+        }
+        return abortion;
+      }
+    
   
        Future<String> insertSexEducation(String topic, String article1, String date, String image1, String article2, image2) async {
         //var encodeduuid = Uri.encodeComponent(uuid)c
