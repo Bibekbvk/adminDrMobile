@@ -57,7 +57,10 @@ class _staffListPageState extends State<staffListPage> {
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+
+           title:Text("staff"),
+      ),
       body: ListView.builder(
         controller: _scrollController,
         itemCount: staffList.length,
@@ -86,16 +89,11 @@ class _staffListPageState extends State<staffListPage> {
                ),
                Container(
                  width:100,
-                  child:Text("${staffList[index].name}", style: TextStyle(
+                  child:Text("${staffList[index].staff_type}", style: TextStyle(
                     fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
                   ),),
                ),
-                  Container(
-                     width:70,
-                     child:Text("${staffList[index].staff_type}", style: TextStyle(
-                    fontSize: 8, color:Colors.lightGreen, fontWeight:FontWeight.w800
-                  ),),
-                  )
+                
                            
 
                                  ] ),
@@ -109,21 +107,11 @@ class _staffListPageState extends State<staffListPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${staffList[index].reg_no}"),
+                            Text("Name:${staffList[index].name}"),
                             Text("Fees/day:${staffList[index].fee}"),
                             Text("Location:${staffList[index].location}"),
                          
-                         Container(
-                           child: RaisedButton(
-                             child:Text("Edit"),
-                             color: Colors.orange,
-                             onPressed: (){
-
-                               print("Name:${staffList[index].reg_no}");
-                             },
-                           ),
-                         ),
-                            
+                        
 
                                     Container(
                            child: RaisedButton(

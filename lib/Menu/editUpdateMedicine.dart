@@ -57,10 +57,11 @@ class _medicineListState extends State<medicineList> {
 
     return Scaffold(
       appBar: AppBar(
+        title:Text("Medicine"),
       //  leading: TextField(
 
       //  ),
-
+        
        ),
       body: ListView.builder(
         controller: _scrollController,
@@ -92,14 +93,14 @@ class _medicineListState extends State<medicineList> {
                     child: Image.network(medList[index].images,  fit: BoxFit.cover ))
                ),
                Container(
-                 width:100,
-                  child:Text("${medList[index].brand_name}", style: TextStyle(
+                 width:140,
+                  child:Text("${medList[index].generic_name}", style: TextStyle(
                     fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
                   ),),
                ),
                   Container(
                      width:70,
-                     child:Text("${medList[index].company}", style: TextStyle(
+                     child:Text("${medList[index].quantity}", style: TextStyle(
                     fontSize: 8, color:Colors.lightGreen, fontWeight:FontWeight.w800
                   ),),
                   )
@@ -116,9 +117,9 @@ class _medicineListState extends State<medicineList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${medList[index].brand_name}"),
-                            Text("Fees/day:${medList[index].price}"),
-                            Text("Location:${medList[index].company}"),
+                            Text("${medList[index].brand_name}"),
+                            Text("${medList[index].price}"),
+                            Text("${medList[index].company}"),
                          
                         
 
@@ -136,18 +137,7 @@ class _medicineListState extends State<medicineList> {
                          ),
 
 
-                           Container(
-                           child: RaisedButton(
-                             child:Text("Update"),
-                             color: Colors.orange,
-                               onPressed: () async {
-                   
-                      var res = await db.deleteMedicine(medList[index].med_id
-                          );
-                    
-                  }
-                           ),
-                         ),
+                         
                              Divider(
                                color: Colors.greenAccent,
                                height: 2,

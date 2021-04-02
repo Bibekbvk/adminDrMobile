@@ -58,10 +58,11 @@ class _medicalItemListState extends State<medicalItemList> {
 
     return Scaffold(
       appBar: AppBar(
+       
       //  leading: TextField(
 
       //  ),
-
+         title: Text("Medical items"),
        ),
       body: ListView.builder(
         controller: _scrollController,
@@ -94,7 +95,7 @@ class _medicalItemListState extends State<medicalItemList> {
                ),
                Container(
                  width:100,
-                  child:Text("${medicalItemList[index].name}", style: TextStyle(
+                  child:Text("${medicalItemList[index].otherName}", style: TextStyle(
                     fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
                   ),),
                ),
@@ -117,9 +118,9 @@ class _medicalItemListState extends State<medicalItemList> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${medicalItemList[index].otherName}"),
-                            Text("Fees/day:${medicalItemList[index].price}"),
-                            Text("Location:${medicalItemList[index].company}"),
+                            Text("${medicalItemList[index].name}"),
+                            Text("${medicalItemList[index].price}"),
+                            Text("Company:${medicalItemList[index].company}"),
                          
                          Container(
                            child: RaisedButton(

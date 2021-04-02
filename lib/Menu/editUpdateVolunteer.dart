@@ -91,7 +91,7 @@ class _volunteerState extends State<volunteer> {
                ),
                Container(
                  width:100,
-                  child:Text("${volunteerList[index].name}", style: TextStyle(
+                  child:Text("${volunteerList[index].type}", style: TextStyle(
                     fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
                   ),),
                ),
@@ -114,9 +114,9 @@ class _volunteerState extends State<volunteer> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         crossAxisAlignment: CrossAxisAlignment.center,
                           children:[ 
-                            Text("Name:${volunteerList[index].details}"),
-                            Text("Fees/day:${volunteerList[index].contact}"),
-                            Text("Location:${volunteerList[index].type}"),
+                            Text("Name:${volunteerList[index].name}"),
+                            Text("Contact:${volunteerList[index].contact}"),
+                            Text("Email:${volunteerList[index].email}"),
                          
                          Container(
                            child: RaisedButton(

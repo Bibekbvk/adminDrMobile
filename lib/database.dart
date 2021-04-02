@@ -1,3 +1,4 @@
+import 'package:drmobileadmin/Menu/insertmedicalitem.dart';
 import 'package:drmobileadmin/Menu/insertstaff.dart';
 import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
@@ -135,6 +136,24 @@ class DatabaseService {
         print(val);
         return val;
       }
+
+      
+        Future<String> insertMedicalitem(String itm_id, String name, String otherName, String company, String price, String quantity, String description, String tags, String images) async {
+        //var encodeduuid = Uri.encodeComponent(uuid)c
+        //var encodeProduct_id = Uri.encodeComponent(product_id);
+        var data = await http.get(
+          "$BASE_URL/api/insertMedicalItem?itm_id=${itm_id}&name=${name}&otherName=${otherName}&company=${company}&price=${price}&quantity=${quantity}&description=${description}&tags=${tags}&images=${images}",
+        );
+        print(data.body);
+        var jsonData = json.decode((data.body));
+        String val = jsonData["error"];
+        if (val == null) {
+          val = "";
+        }
+        print(val);
+        return val;
+      }
+
 
     Future<String> insertabortion(String ID, String name, String location, String contact, String details, String images) async {
         //var encodeduuid = Uri.encodeComponent(uuid)c
