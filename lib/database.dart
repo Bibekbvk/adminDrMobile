@@ -2,6 +2,7 @@ import 'package:drmobileadmin/Menu/insertstaff.dart';
 import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/Staff.dart';
+import 'package:drmobileadmin/module/invitation.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
 import 'package:drmobileadmin/module/staffRegistration.dart';
 import 'package:flutter/material.dart';
@@ -164,13 +165,21 @@ class DatabaseService {
 
 
    Future<int> deleteFeedback(String id) async {
-        //var encodeduuid = Uri.encodeComponent(uuid)c
-        //var encodeProduct_id = Uri.encodeComponent(product_id);
+       
         var data = await http.get(
           "$BASE_URL/api/deleteFeedback?UID=${id}",
         );
         return data.statusCode;
       }
+
+   Future<int> deleteInvitation(int I_id) async {
+       
+        var data = await http.get(
+          "$BASE_URL/api/deleteInvitation?I_id=${I_id}",
+        );
+        return data.statusCode;
+      }
+
 
          Future<int> deletestaff(String id) async {
         //var encodeduuid = Uri.encodeComponent(uuid)c
@@ -238,6 +247,7 @@ class DatabaseService {
     for (var each in jsonData) {
       Feedbacks feedbackDetails = Feedbacks(
         UID: each['UID'],
+        contact: each['contact'],
         Name: each['Name'],
         feedback: each['feedback'],
   
@@ -247,7 +257,29 @@ class DatabaseService {
     return feedbacksList;
   }
 
+  
 
+     Future<List<Invitation>> invitations() async {
+    var data = await http.get(
+      "$BASE_URL/api/invitations",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Invitation> invitationList = [];
+    for (var each in jsonData) {
+      Invitation invitationDetails = Invitation(
+        I_id: each['I_id'],
+        user_id: each['user_id'],
+        name: each['name'],
+        staff_id: each['staff_id'],
+        contact: each['contact']
+  
+      );
+      invitationList.add(invitationDetails);
+    }
+    return invitationList;
+  }
 
 
 

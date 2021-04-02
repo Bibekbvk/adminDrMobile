@@ -22,7 +22,7 @@ class _insertAbortionState extends State<insertAbortion> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Inset Help"),
+          title: Text("Inset Abortion"),
           actions: [Icon(Icons.feedback_rounded)],
         ),
         body: ListView(children: [
@@ -65,7 +65,7 @@ class _insertAbortionState extends State<insertAbortion> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: contact,
-                  maxLines: 10,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "contact",
                       border: OutlineInputBorder(
@@ -110,7 +110,7 @@ class _insertAbortionState extends State<insertAbortion> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '') {
+                    if (name.text == '' || location.text == '' || contact.text == '' || details.text == '' || images.text =='') {
                       _showDialogEmptyinsertAbortion();
                     } else {
                       var res = await db.insertabortion(
@@ -133,7 +133,7 @@ class _insertAbortionState extends State<insertAbortion> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "insertAbortion is Empty",
+            "Some Fields are empty",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

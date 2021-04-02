@@ -1,22 +1,23 @@
 import 'package:drmobileadmin/database.dart';
 import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
+import 'package:drmobileadmin/module/invitation.dart';
 import 'package:flutter/material.dart';
 
 
 
-class feedbackPage extends StatefulWidget {
+class viewInvitation extends StatefulWidget {
   @override
   
 
   
 
-  _feedbackPageState createState() => _feedbackPageState();
+  _viewInvitationState createState() => _viewInvitationState();
 }
 
-class _feedbackPageState extends State<feedbackPage> {
+class _viewInvitationState extends State<viewInvitation> {
   DatabaseService db = DatabaseService();
-  List<Feedbacks> feedbackList = new List();
+  List<Invitation> invitationList = new List();
   ScrollController _scrollController = new ScrollController();
 
 
@@ -37,7 +38,7 @@ class _feedbackPageState extends State<feedbackPage> {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
-          offset = feedbackList.length;
+          offset = invitationList.length;
           fetch(offset);
         }
 
@@ -65,7 +66,7 @@ class _feedbackPageState extends State<feedbackPage> {
        ),
       body: ListView.builder(
         controller: _scrollController,
-        itemCount: feedbackList.length,
+        itemCount: invitationList.length,
         itemBuilder: (BuildContext context, int index) {
         
          return Container(
@@ -75,7 +76,7 @@ class _feedbackPageState extends State<feedbackPage> {
             child: Column(
              mainAxisAlignment: MainAxisAlignment.spaceEvenly,        
             children: [
-               Text("Feedback Provided"),
+               Text("Invited Staff"),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                                 children:[ 
@@ -88,9 +89,10 @@ class _feedbackPageState extends State<feedbackPage> {
                   border:Border.all(color: Colors.green, width: 0),
                   borderRadius: BorderRadius.circular(22)
                   ),
-                  child: ClipRRect(
+                  child: ClipRRect( 
+                    
                     borderRadius: BorderRadius.all(Radius.circular(0)),
-                    child: Text("${feedbackList[index].feedback}", ))
+                    child: Text("StaffID:${invitationList[index].staff_id}  \n Name:${invitationList[index].name} \n Contact No: ${invitationList[index].contact} \n  Invitation ID: ${invitationList[index].I_id}}", ))
                ),
              
                  
@@ -108,9 +110,8 @@ class _feedbackPageState extends State<feedbackPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                             children:[ 
-                              Text("Provider Name:${feedbackList[index].Name}"),
-                              Text("By user:${feedbackList[index].UID}"),
-                              Text("Contact:${feedbackList[index].contact}"),
+                              Text("Provider Name:${invitationList[index].user_id}"),
+                             
                            
                           
 
@@ -120,7 +121,7 @@ class _feedbackPageState extends State<feedbackPage> {
                                color: Colors.orange,
                                  onPressed: () async {
                      
-                        var res = await db.deleteFeedback(feedbackList[index].UID
+                        var res = await db.deleteInvitation(invitationList[index].I_id
                             );
                       
                     }
@@ -164,15 +165,15 @@ class _feedbackPageState extends State<feedbackPage> {
   fetch(int offset) async {
     print("in fetch");
 
-    var data = await db.feedbacks();
+    var data = await db.invitations();
     currentDataLength = data.length;
     print("below data");
 
     print("out of loop");
 
     setState(() {
-      for (Feedbacks p in data) {
-        feedbackList.add(p);
+      for (Invitation p in data) {
+        invitationList.add(p);
       }
     });
   }

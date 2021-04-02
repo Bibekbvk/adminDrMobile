@@ -36,7 +36,7 @@ class _insertHelpState extends State<insertHelp> {
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: topic,
-                  maxLines: 1,
+                  maxLines: 2,
                   decoration: InputDecoration(
                       labelText: "Topic",
                       border: OutlineInputBorder(
@@ -76,7 +76,7 @@ class _insertHelpState extends State<insertHelp> {
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (topic.text == '') {
+                    if (topic.text == '' || image.text == '' || details.text == '') {
                       _showDialogEmptyinsertHelp();
                     } else {
                       var res = await db.inserthelp(
