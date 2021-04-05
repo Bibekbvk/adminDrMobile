@@ -132,6 +132,11 @@ class _insert_VolunterState extends State<insert_Volunter> {
                     } else {
                       var res = await db.insertVolunteer(
                           "vol", name.text, location.text, contact.text, type.text, details.text, email.text, image.text);
+                      if(res==200){print("suc");}
+                      else if(res==500){print("dupli");}
+                      else{print('error');} 
+
+
                     }
                   })
             ],

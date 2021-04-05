@@ -118,7 +118,7 @@ class _insertStaffState extends State<insertStaff> {
                       _showDialogEmptyinsertStaff();
                     } else {
                       var res = await db.insertstaff(
-                          "reg", name.text, stafftype.text, location.text, fee.text, reg_no.text, image.text);
+                           name.text, stafftype.text, location.text, fee.text, reg_no.text, image.text);
                     }
                   })
             ],

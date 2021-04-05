@@ -89,11 +89,11 @@ class DatabaseService {
         return val;
       }
 
-       Future<String> insertstaff(String ID, String name, String staffType, String location, String fee, String reg_no, String photo) async {
+       Future<String> insertstaff(String name, String staffType, String location, String fee, String reg_no, String photo) async {
         //var encodeduuid = Uri.encodeComponent(uuid)c
         //var encodeProduct_id = Uri.encodeComponent(product_id);
         var data = await http.get(
-          "$BASE_URL/api/insertstaff?S_ID=${ID}&Name=${name}&staff_type=${staffType}&location=${location}&fee=${fee}&reg_no${reg_no}&photo=${photo}",
+          "$BASE_URL/api/insertstaff?Name=${name}&staff_type=${staffType}&location=${location}&fee=${fee}&reg_no=${reg_no}&photo=${photo}",
         );
         print(data.body);
         var jsonData = json.decode((data.body));
@@ -105,7 +105,7 @@ class DatabaseService {
         return val;
       }
 
-       Future<String> insertVolunteer(String ID, String name, String location, String contact, String type, String details, String email, String image) async {
+       Future<int> insertVolunteer(String ID, String name, String location, String contact, String type, String details, String email, String image) async {
         //var encodeduuid = Uri.encodeComponent(uuid)
         //var encodeProduct_id = Uri.encodeComponent(product_id);
         var data = await http.get(
@@ -118,7 +118,7 @@ class DatabaseService {
           val = "";
         }
         print(val);
-        return val;
+        return data.statusCode;
       }
       
         Future<String> insertMedicine(String med_id, String brandName, String generic_name, String company, String price, String quantity, String description, String tags, String images) async {
