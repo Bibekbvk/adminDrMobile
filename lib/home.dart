@@ -1,3 +1,4 @@
+import 'package:drmobileadmin/Menu/ViewMedicineOrder.dart';
 import 'package:drmobileadmin/Menu/editUpdateMedicalitems.dart';
 import 'package:drmobileadmin/Menu/editUpdateMedicine.dart';
 import 'package:drmobileadmin/Menu/editUpdateStaff.dart';
@@ -9,6 +10,7 @@ import 'package:drmobileadmin/Menu/insertmedicalitem.dart';
 import 'package:drmobileadmin/Menu/insertstaff.dart';
 import 'package:drmobileadmin/Menu/viewFeedback.dart';
 import 'package:drmobileadmin/Menu/viewInvitation.dart';
+import 'package:drmobileadmin/Menu/viewItemOrder.dart';
 import 'package:drmobileadmin/Menu/viewStaffRegistration.dart';
 import 'package:flutter/material.dart';
 
@@ -39,7 +41,7 @@ class _homeState extends State<home> {
              RaisedButton(
              onPressed: (){
 
-
+               Navigator.push(context, MaterialPageRoute( builder: (context)=>viewMedicineOrders()));
              },
              child: Text("View Medicine Order")
               
@@ -186,7 +188,7 @@ class _homeState extends State<home> {
 
               RaisedButton(
              onPressed: (){
-                           Navigator.push(context, MaterialPageRoute( builder: (context)=>insertMedicalitem()));
+                           Navigator.push(context, MaterialPageRoute( builder: (context)=>viewItemOrders()));
 
 
              },

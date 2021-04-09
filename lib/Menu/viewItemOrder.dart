@@ -2,23 +2,24 @@ import 'package:drmobileadmin/database.dart';
 import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/invitation.dart';
+import 'package:drmobileadmin/module/itemOrder.dart';
 import 'package:drmobileadmin/module/viewMedicineOrder.dart';
 import 'package:flutter/material.dart';
 
 
 
-class viewMedicineOrders extends StatefulWidget {
+class viewItemOrders extends StatefulWidget {
   @override
   
 
   
 
-  _viewMedicineOrdersState createState() => _viewMedicineOrdersState();
+  _viewItemOrdersState createState() => _viewItemOrdersState();
 }
 
-class _viewMedicineOrdersState extends State<viewMedicineOrders> {
+class _viewItemOrdersState extends State<viewItemOrders> {
   DatabaseService db = DatabaseService();
-  List<Medicine_order> medicineorderList = new List();
+  List<Item_order> itemOrderList = new List();
   ScrollController _scrollController = new ScrollController();
 
 
@@ -39,7 +40,7 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
-          offset = medicineorderList.length;
+          offset = itemOrderList.length;
           fetch(offset);
         }
 
@@ -67,7 +68,7 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
        ),
       body: ListView.builder(
         controller: _scrollController,
-        itemCount: medicineorderList.length,
+        itemCount: itemOrderList.length,
         itemBuilder: (BuildContext context, int index) {
         
          return Container(
@@ -93,7 +94,7 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
                   child: ClipRRect( 
                     
                     borderRadius: BorderRadius.all(Radius.circular(0)),
-                    child: Text("StaffID:${medicineorderList[index].med_id}  \n Name:${medicineorderList[index].userName} \n Contact No: ${medicineorderList[index].user_contact} \n  Invitation ID: ${medicineorderList[index].order_id}}", ))
+                    child: Text("StaffID:${itemOrderList[index].itmOrder_id}  \n Name:${itemOrderList[index].itm_id} \n Contact No: ${itemOrderList[index].user_contact} \n  Invitation ID: ${itemOrderList[index].user_name}}", ))
                ),
              
                  
@@ -111,7 +112,7 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                             children:[ 
-                              Text("Provider Name:${medicineorderList[index].user_id}"),
+                              Text("Provider Name:${itemOrderList[index].user_id}"),
                              
                            
                           
@@ -122,7 +123,7 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
                                color: Colors.orange,
                                  onPressed: () async {
                      
-                        var res = await db.deleteInvitation(medicineorderList[index].med_id
+                        var res = await db.deleteInvitation(itemOrderList[index].itmOrder_id
                             );
                       
                     }
@@ -166,15 +167,15 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
   fetch(int offset) async {
     print("in fetch");
 
-    var data = await db.med_order();
+    var data = await db.itm_order();
     currentDataLength = data.length;
     print("below data");
 
     print("out of loop");
 
     setState(() {
-      for (Medicine_order p in data) {
-        medicineorderList.add(p);
+      for (Item_order p in data) {
+        itemOrderList.add(p);
       }
     });
   }

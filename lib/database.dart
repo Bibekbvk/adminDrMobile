@@ -4,8 +4,10 @@ import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
 import 'package:drmobileadmin/module/Staff.dart';
 import 'package:drmobileadmin/module/invitation.dart';
+import 'package:drmobileadmin/module/itemOrder.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
 import 'package:drmobileadmin/module/staffRegistration.dart';
+import 'package:drmobileadmin/module/viewMedicineOrder.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -200,7 +202,7 @@ class DatabaseService {
       }
 
 
-         Future<int> deletestaff(String id) async {
+         Future<int> deletestaff(int id) async {
         //var encodeduuid = Uri.encodeComponent(uuid)c
         //var encodeProduct_id = Uri.encodeComponent(product_id);
         var data = await http.get(
@@ -300,6 +302,55 @@ class DatabaseService {
     return invitationList;
   }
 
+
+
+     Future<List<Medicine_order>> med_order() async {
+    var data = await http.get(
+      "$BASE_URL/api/medicineorder",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Medicine_order> medorderList = [];
+    for (var each in jsonData) {
+      Medicine_order medicineOrderDetails = Medicine_order(
+        order_id: each['order_id'],
+        user_id: each['user_id'],
+        med_id: each['med_id'],
+        user_contact: each['user_contact'],
+        userName: each['userName']
+  
+      );
+      medorderList.add(medicineOrderDetails);
+    }
+    return medorderList;
+  }
+   
+
+  
+
+     Future<List<Item_order>> itm_order() async {
+    var data = await http.get(
+      "$BASE_URL/api/ViewitemOrder",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Item_order> itmorderList = [];
+    for (var each in jsonData) {
+      Item_order itemOrderDetails = Item_order(
+        itmOrder_id: each['order_id'],
+        user_id: each['user_id'],
+        itm_id: each['itm_id'],
+        user_contact: each['user_contact'],
+        user_name: each['user_name']
+  
+      );
+      itmorderList.add(itemOrderDetails);
+    }
+    return itmorderList;
+  }
+   
 
 
 
