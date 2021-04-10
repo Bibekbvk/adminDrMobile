@@ -1,14 +1,10 @@
-
 import 'package:drmobileadmin/database.dart';
 import 'package:drmobileadmin/module/Staff.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class staffListPage extends StatefulWidget {
   @override
-  
-
   staffListPage();
 
   _staffListPageState createState() => _staffListPageState();
@@ -19,16 +15,12 @@ class _staffListPageState extends State<staffListPage> {
   List<Staffs> staffList = new List();
   ScrollController _scrollController = new ScrollController();
 
-
-
   int offset = 0;
-  
+
   int currentDataLength = 0;
 
   @override
   void initState() {
-
-
     super.initState();
     fetch(offset);
     _scrollController.addListener(() {
@@ -55,116 +47,92 @@ class _staffListPageState extends State<staffListPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
-
-           title:Text("staff"),
+        title: Text("staff Section"),
       ),
       body: ListView.builder(
         controller: _scrollController,
         itemCount: staffList.length,
         itemBuilder: (BuildContext context, int index) {
-         return Container(
-           padding: EdgeInsets.all(10),
-           color: Colors.black54,
+          return Container(
+            padding: EdgeInsets.all(10),
+            color: Colors.black54,
             child: Row(
-             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-             
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                                children:[ 
-                                  Container(
-                                    padding: EdgeInsets.all(5
-                                    ),
-                  height: 120,
-                  width: 100,
-                  decoration: BoxDecoration(
-                  border:Border.all(color: Colors.green, width: 4),
-                  borderRadius: BorderRadius.circular(22)
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              // crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  Container(
+                      padding: EdgeInsets.all(5),
+                      height: 120,
+                      width: 100,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.green, width: 4),
+                          borderRadius: BorderRadius.circular(22)),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          child: Image.network(staffList[index].photo,
+                              fit: BoxFit.cover))),
+                  Container(
+                    width: 100,
+                    child: Text(
+                      "${staffList[index].staff_type}",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.lightGreen,
+                          fontWeight: FontWeight.w300),
+                    ),
                   ),
-                  child: Image.network(staffList[index].photo,  fit: BoxFit.fill )
-               ),
-               Container(
-                 width:100,
-                  child:Text("${staffList[index].staff_type}", style: TextStyle(
-                    fontSize: 12, color:Colors.lightGreen, fontWeight:FontWeight.w300
-                  ),),
-               ),
-                
-                           
-
-                                 ] ),
-             
-                 Expanded(
-                   flex:7,
-                    child: Container(
-                     width: 150,
-                     height: 200,
-                   child:Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                          children:[ 
+                  Container(
+                    width: 100,
+                    child: Text(
+                      "${staffList[index].staff_id}",
+                      style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.lightGreen,
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                ]),
+                Expanded(
+                  flex: 7,
+                  child: Container(
+                      width: 150,
+                      height: 200,
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
                             Text("Name:${staffList[index].name}"),
                             Text("Fees/day:${staffList[index].fee}"),
                             Text("Location:${staffList[index].location}"),
-                         
-                        
-
-                                    Container(
-                           child: RaisedButton(
-                             child:Text("Delete"),
-                             color: Colors.orange,
-                            
-
-                                              onPressed: () async {
-                   
-                      var res = await db.deletestaff(staffList[index].staff_id
-                          );
-                    
-                  
-                             },
-                           ),
-                         ),
-
-                     
-
-
-
-                             Divider(
-                               color: Colors.greenAccent,
-                               height: 2,
-                               thickness: 2,
-                             ) 
-                     ]
-                               
-                    
-                   )
-               ),
-                 ),
-             
-              
-            ],
-
-            
-          
-             
-           ),
-             
-        
-         );
-     
-        
+                            Container(
+                              child: RaisedButton(
+                                child: Text("Delete"),
+                                color: Colors.orange,
+                                onPressed: () async {
+                                  var res = await db
+                                      .deletestaff(staffList[index].staff_id);
+                                },
+                              ),
+                            ),
+                            Divider(
+                              color: Colors.greenAccent,
+                              height: 2,
+                              thickness: 2,
+                            )
+                          ])),
+                ),
+              ],
+            ),
+          );
         },
       ),
     );
-
-
   }
 
-  fetch( int offset) async {
+  fetch(int offset) async {
     print("in fetch");
 
     var data = await db.staff();

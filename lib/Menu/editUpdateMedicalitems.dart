@@ -72,7 +72,7 @@ class _medicalItemListState extends State<medicalItemList> {
          return Container(
            
            padding: EdgeInsets.all(10),
-           color: Colors.black54,
+           color: Colors.white10,
             child: Row(
              mainAxisAlignment: MainAxisAlignment.spaceEvenly,        
             children: [
@@ -121,6 +121,8 @@ class _medicalItemListState extends State<medicalItemList> {
                             Text("${medicalItemList[index].name}"),
                             Text("${medicalItemList[index].price}"),
                             Text("Company:${medicalItemList[index].company}"),
+                            Text("ID:${medicalItemList[index].itm_id}"),
+                             
                          
                          Container(
                            child: RaisedButton(

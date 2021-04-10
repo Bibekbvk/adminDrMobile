@@ -420,6 +420,7 @@ class DatabaseService {
         name: each['name'],
         location: each['location'],
         contact: each['contact'],
+        type: each['type'],
         details: each['details'],
         email: each['email'],
         image: each['image'],

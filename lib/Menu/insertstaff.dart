@@ -115,10 +115,31 @@ class _insertStaffState extends State<insertStaff> {
                   label: Text("Send"),
                   onPressed: () async {
                     if (name.text == '' || stafftype.text == '' || reg_no.text == '' || location.text == '' || fee.text == '' || image.text == '') {
-                      _showDialogEmptyinsertStaff();
+                      _showDialogEmptyinsertStaff("Some Fields Are empty");
                     } else {
                       var res = await db.insertstaff(
                            name.text, stafftype.text, location.text, fee.text, reg_no.text, image.text);
+
+                            if(res==200){
+                          _showDialogEmptyinsertStaff("Successfully Inserted staff");
+
+                          Clear(){
+
+                             name.clear();
+                             stafftype.clear();
+                             location.clear();
+                             fee.clear();
+                             reg_no.clear();
+                             image.clear();
+
+                          }
+
+                              print("suc");}
+                      else if(res==500){
+                        
+                         _showDialogEmptyinsertStaff("This Staffs already Exists or Registered");
+                        }
+                      else{print('error');} 
                     }
                   })
             ],
@@ -126,7 +147,7 @@ class _insertStaffState extends State<insertStaff> {
         ]));
   }
 
-  _showDialogEmptyinsertStaff() {
+  _showDialogEmptyinsertStaff(String Message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -137,7 +158,7 @@ class _insertStaffState extends State<insertStaff> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "Some Fields are empty",
+            "$Message",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[
