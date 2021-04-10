@@ -1,3 +1,4 @@
+import 'package:drmobileadmin/Splash.dart';
 import 'package:flutter/material.dart';
 
 import 'home.dart';
@@ -8,5 +9,5 @@ void main() => runApp(MaterialApp(
     splashColor: Colors.white60,
     backgroundColor: Colors.blue[400]
   ),
-      home: home(),
+      home: splash(),
     ));
