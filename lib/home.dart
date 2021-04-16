@@ -12,6 +12,7 @@ import 'package:drmobileadmin/Menu/viewFeedback.dart';
 import 'package:drmobileadmin/Menu/viewInvitation.dart';
 import 'package:drmobileadmin/Menu/viewItemOrder.dart';
 import 'package:drmobileadmin/Menu/viewStaffRegistration.dart';
+import 'package:drmobileadmin/ReplyQuestion.dart';
 import 'package:flutter/material.dart';
 
 import 'Menu/insertMedicine.dart';
@@ -236,11 +237,47 @@ class _homeState extends State<home> {
                               MaterialPageRoute(
                                   builder: (context) => medicalItemList()));
                         },
-                        child: Text("view/ Update / delete medical item"))
+                        child: Text("view/ Update / delete medical item")),
+
+
+                        
                   ],
-                )
+                  
+                ),
+                
               ],
             ),
+          ),
+    Container
+    
+    (
+      padding: EdgeInsets.all(22),
+      child: Text("The questions are waiting for your reply.....", style: TextStyle(fontSize:18, fontWeight:FontWeight.w700),)),
+          InkWell(
+                      child: Container(
+              padding: EdgeInsets.all(22),
+              decoration: BoxDecoration(
+                color: Colors.blueAccent,
+                borderRadius:BorderRadius.circular(55)
+              ),
+                            child: Column(
+
+                              children: [
+                                Icon(Icons.question_answer, size: 66,),
+                                 Text("Reply Question", style: TextStyle(
+                                   fontSize: 36
+                                 ),)
+
+                              ],
+                            ),
+                          ),
+
+                           onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => replyQuestion()));
+                        },
           )
         ],
       ),

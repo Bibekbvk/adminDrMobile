@@ -6,6 +6,7 @@ import 'package:drmobileadmin/module/Staff.dart';
 import 'package:drmobileadmin/module/invitation.dart';
 import 'package:drmobileadmin/module/itemOrder.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
+import 'package:drmobileadmin/module/question.dart';
 import 'package:drmobileadmin/module/staffRegistration.dart';
 import 'package:drmobileadmin/module/viewMedicineOrder.dart';
 import 'package:flutter/material.dart';
@@ -326,6 +327,36 @@ class DatabaseService {
     }
     return invitationList;
   }
+
+
+  Future<List<Question>> questions() async {
+    var data = await http.get(
+      "$BASE_URL/api/qanda",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Question> questionList = [];
+    for (var each in jsonData) {
+      Question questionDetails = Question(
+          u_id: each['u_id'],
+          q_id: each['q_id'],
+          question: each['question'],
+          answer: each['answer'],
+          );
+      questionList.add(questionDetails);
+    }
+    return questionList;
+  }
+
+ 
+
+Future<int> answer(String answer, int q_id) async {
+    var data = await http
+        .get("$BASE_URL/api/answer?u_id=${q_id}&answer=${answer}");
+    return data.statusCode;
+  }
+
 
   Future<List<Medicine_order>> med_order() async {
     var data = await http.get(

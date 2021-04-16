@@ -15,12 +15,12 @@ class SignInScreen extends StatelessWidget {
             flex: 3,
             child: Container(
               decoration: BoxDecoration(
-                // image: DecorationImage(
-                //   image: AssetImage('images/dr.png'),
-                //   fit: BoxFit.fill,
-                //   alignment: Alignment.bottomCenter,
-                // ),
-              ),
+                  // image: DecorationImage(
+                  //   image: AssetImage('images/dr.png'),
+                  //   fit: BoxFit.fill,
+                  //   alignment: Alignment.bottomCenter,
+                  // ),
+                  ),
             ),
           ),
           Expanded(
@@ -85,22 +85,6 @@ class SignInScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 30),
                     child: Row(
                       children: <Widget>[
-                        Container(
-                            child: InkWell(
-                          child: Text(
-                            "Use Annonomosly",
-                            style: TextStyle(
-                                fontSize: 22,
-                                color: Colors.green,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => home()));
-                          },
-                        )),
                         SizedBox(width: 20),
                         Container(),
                         Spacer(),
@@ -113,8 +97,8 @@ class SignInScreen extends StatelessWidget {
                               Icons.arrow_forward,
                               color: Colors.black,
                             ),
-                            onTap: () async {
-                              if (password.text == '') {
+                             onTap: () async {
+                              if (password.text == '' || email.text == '') {
                                 showDialog(
                                   context: context,
                                   builder: (context) => AlertDialog(
@@ -122,12 +106,13 @@ class SignInScreen extends StatelessWidget {
                                           "Please enter Correct Username and password")),
                                 );
                               } else {
+                                
                                 print("ayooo");
                                 var res = await db.insertlogin(
                                     email.text, password.text);
                                 print("${res}ressss");
 
-                                if (res == 404) {
+                                if (res == 401) {
                                   showDialog(
                                     context: context,
                                     builder: (context) => AlertDialog(
