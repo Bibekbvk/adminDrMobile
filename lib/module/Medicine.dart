@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 
 class Medicine{
-  final String med_id;
+  final int med_id;
   final String brand_name;
   final String generic_name;
   final String company;

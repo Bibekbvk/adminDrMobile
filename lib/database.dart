@@ -196,7 +196,7 @@ class DatabaseService {
     return val;
   }
 
-  Future<int> deleteMedicine(String id) async {
+  Future<int> deleteMedicine(int id) async {
     //var encodeduuid = Uri.encodeComponent(uuid)c
     //var encodeProduct_id = Uri.encodeComponent(product_id);
     var data = await http.get(
