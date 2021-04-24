@@ -1,4 +1,3 @@
-
 import 'package:drmobileadmin/database.dart';
 import 'package:flutter/material.dart';
 
@@ -71,12 +70,11 @@ class _insertEmergencyState extends State<insertEmergency> {
                           borderRadius: BorderRadius.circular(11))),
                 ),
               ),
-               SizedBox(
+              SizedBox(
                 height: 20,
               ),
-
-                  Text("location"),
-                  Container(
+              Text("location"),
+              Container(
                 padding: EdgeInsets.all(20),
                 child: TextFormField(
                   controller: location,
@@ -87,16 +85,18 @@ class _insertEmergencyState extends State<insertEmergency> {
                           borderRadius: BorderRadius.circular(11))),
                 ),
               ),
-                
               FlatButton.icon(
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '' || contact1.text == '' || contact2.text == '' || location.text == '') {
+                    if (name.text == '' ||
+                        contact1.text == '' ||
+                        contact2.text == '' ||
+                        location.text == '') {
                       _showDialogEmptyinsertEmergency();
                     } else {
-                      var res = await db.insertemergency("Bibek",
-                          name.text, contact1.text, contact2.text, location.text);
+                      var res = await db.insertemergency("Bibek", name.text,
+                          contact1.text, contact2.text, location.text);
                     }
                   })
             ],

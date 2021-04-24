@@ -1,16 +1,17 @@
 import 'package:drmobileadmin/database.dart';
 import 'package:drmobileadmin/module/staffRegistration.dart';
+import 'package:drmobileadmin/module/volunteerRegs.dart';
 
 import 'package:flutter/material.dart';
 
-class viewStaffRegistration extends StatefulWidget {
+class viewvolunteerRegistration extends StatefulWidget {
   @override
-  _viewStaffRegistrationState createState() => _viewStaffRegistrationState();
+  _viewvolunteerRegistrationState createState() => _viewvolunteerRegistrationState();
 }
 
-class _viewStaffRegistrationState extends State<viewStaffRegistration> {
+class _viewvolunteerRegistrationState extends State<viewvolunteerRegistration> {
   DatabaseService db = DatabaseService();
-  List<StaffsReg> staffsReg = new List();
+  List<VolunteerReg> volunteerReg = new List();
   ScrollController _scrollController = new ScrollController();
 
   int offset = 0;
@@ -27,7 +28,7 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
         if (currentDataLength >= 10) {
           print("List bigger than 10");
 
-          offset = staffsReg.length;
+          offset = volunteerReg.length;
           fetch(offset);
         }
 
@@ -54,7 +55,7 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
           ),
       body: ListView.builder(
         controller: _scrollController,
-        itemCount: staffsReg.length,
+        itemCount: volunteerReg.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             padding: EdgeInsets.all(10),
@@ -64,7 +65,7 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
               children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   Container(
-                    child: Text("Name:${staffsReg[index].Name}"),
+                    child: Text("Name:${volunteerReg[index].Name}"),
                   ),
                   Container(
                       padding: EdgeInsets.all(5),
@@ -73,7 +74,7 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.green, width: 4),
                           borderRadius: BorderRadius.circular(22)),
-                      child: Text("Reg no: \n ${staffsReg[index].reg_no}"),
+                      child: Text("Reg no: \n ${volunteerReg[index].reg_no}"),
                        ),
                 ]),
                 Expanded(
@@ -85,9 +86,9 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("Contact:${staffsReg[index].Contact}"),
-                            Text("Location:${staffsReg[index].location}"),
-                            Text("User_ID:${staffsReg[index].user_id}"),
+                            Text("Contact:${volunteerReg[index].contact}"),
+                            Text("Location:${volunteerReg[index].location}"),
+                            Text("User_ID:${volunteerReg[index].user_id}"),
                             Container(
                               child: RaisedButton(
                                 child: Text("Delete"),
@@ -115,15 +116,15 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
   fetch(int offset) async {
     print("in fetch");
 
-    var data = await db.staffResgis();
+    var data = await db.VolResgis();
     currentDataLength = data.length;
     print("below data");
 
     print("out of loop");
 
     setState(() {
-      for (StaffsReg p in data) {
-        staffsReg.add(p);
+      for (VolunteerReg p in data) {
+        volunteerReg.add(p);
       }
     });
   }

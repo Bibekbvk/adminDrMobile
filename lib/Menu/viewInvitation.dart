@@ -89,7 +89,7 @@ class _viewInvitationState extends State<viewInvitation> {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                  "Provider Name:${invitationList[index].user_id}"),
+                                  "Provider Name/ User_ID:${invitationList[index].user_id}"),
                               Container(
                                 child: RaisedButton(
                                     child: Text("Delete"),

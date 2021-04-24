@@ -8,6 +8,7 @@ import 'package:drmobileadmin/Menu/insertemergency.dart';
 import 'package:drmobileadmin/Menu/inserthelp.dart';
 import 'package:drmobileadmin/Menu/insertmedicalitem.dart';
 import 'package:drmobileadmin/Menu/insertstaff.dart';
+import 'package:drmobileadmin/Menu/staffandvolunteer.dart';
 import 'package:drmobileadmin/Menu/viewFeedback.dart';
 import 'package:drmobileadmin/Menu/viewInvitation.dart';
 import 'package:drmobileadmin/Menu/viewItemOrder.dart';
@@ -18,6 +19,7 @@ import 'package:flutter/material.dart';
 import 'Menu/insertMedicine.dart';
 import 'Menu/insertabortion.dart';
 import 'Menu/insertsexeducation.dart';
+import 'Menu/viewPrescriptionOrder.dart';
 
 class home extends StatefulWidget {
   @override
@@ -60,7 +62,14 @@ class _homeState extends State<home> {
                         },
                         child: Text("View Medicine Order")),
                     RaisedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => presOrder()));
+
+
+                        },
                         child: Text("View Prescrption order")),
                     RaisedButton(
                         onPressed: () {
@@ -84,7 +93,7 @@ class _homeState extends State<home> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      viewStaffRegistration()));
+                                      volunteerAnd()));
                         },
                         child: Text("view staff/  \n volunteer Registration")),
                   ],

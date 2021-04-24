@@ -7,7 +7,7 @@ class Invitation{
   final int I_id;
   final int user_id;
   final String name;
-  final String staff_id;
+  final int staff_id;
   final String contact;
   
 

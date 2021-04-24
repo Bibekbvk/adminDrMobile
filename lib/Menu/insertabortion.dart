@@ -1,4 +1,3 @@
-
 import 'package:drmobileadmin/database.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +14,6 @@ TextEditingController location = new TextEditingController();
 TextEditingController contact = new TextEditingController();
 TextEditingController details = new TextEditingController();
 TextEditingController images = new TextEditingController();
-
 
 class _insertAbortionState extends State<insertAbortion> {
   @override
@@ -72,8 +70,7 @@ class _insertAbortionState extends State<insertAbortion> {
                           borderRadius: BorderRadius.circular(11))),
                 ),
               ),
-                  
-                   SizedBox(
+              SizedBox(
                 height: 20,
               ),
               Text("details"),
@@ -88,8 +85,7 @@ class _insertAbortionState extends State<insertAbortion> {
                           borderRadius: BorderRadius.circular(11))),
                 ),
               ),
-
-               SizedBox(
+              SizedBox(
                 height: 20,
               ),
               Text("images"),
@@ -104,17 +100,24 @@ class _insertAbortionState extends State<insertAbortion> {
                           borderRadius: BorderRadius.circular(11))),
                 ),
               ),
-
-                
               FlatButton.icon(
                   icon: Icon(Icons.send_outlined),
                   label: Text("Send"),
                   onPressed: () async {
-                    if (name.text == '' || location.text == '' || contact.text == '' || details.text == '' || images.text =='') {
+                    if (name.text == '' ||
+                        location.text == '' ||
+                        contact.text == '' ||
+                        details.text == '' ||
+                        images.text == '') {
                       _showDialogEmptyinsertAbortion();
                     } else {
                       var res = await db.insertabortion(
-                          "ID", name.text, location.text, contact.text, details.text, images.text);
+                          "ID",
+                          name.text,
+                          location.text,
+                          contact.text,
+                          details.text,
+                          images.text);
                     }
                   })
             ],

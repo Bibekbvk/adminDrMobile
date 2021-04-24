@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
 
-class StaffsReg{
+class VolunteerReg{
+  final int vr_id;
   final int user_id;
   final String Name;
   final String reg_no;
-  final String Contact;
+  final String contact;
   final String location;
 
 
 
 
 
-  StaffsReg(
-      {this.user_id,
+  VolunteerReg(
+      {
+      this.vr_id,
+      this.user_id,
       this.Name,
       this.reg_no,
-      this.Contact,
+      this.contact,
       this.location,
     
      });

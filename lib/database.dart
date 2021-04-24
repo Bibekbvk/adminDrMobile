@@ -6,9 +6,11 @@ import 'package:drmobileadmin/module/Staff.dart';
 import 'package:drmobileadmin/module/invitation.dart';
 import 'package:drmobileadmin/module/itemOrder.dart';
 import 'package:drmobileadmin/module/medicalItem.dart';
+import 'package:drmobileadmin/module/prescription.dart';
 import 'package:drmobileadmin/module/question.dart';
 import 'package:drmobileadmin/module/staffRegistration.dart';
 import 'package:drmobileadmin/module/viewMedicineOrder.dart';
+import 'package:drmobileadmin/module/volunteerRegs.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -17,6 +19,7 @@ import 'constant.dart';
 import 'module/volinteer.dart';
 
 class DatabaseService {
+
   Future<List<StaffsReg>> staffResgis() async {
     var data = await http.get(
       "$BASE_URL/api/ViewStaffRegistration",
@@ -24,19 +27,43 @@ class DatabaseService {
 
     var jsonData = json.decode((data.body));
     print(jsonData);
-    List<StaffsReg> abortion = [];
+    List<StaffsReg> staffsRegs = [];
     for (var each in jsonData) {
       StaffsReg abDetails = StaffsReg(
-        U_id: each['U_id'],
-        image: each['image'],
-        image1: each['image1'],
-        image2: each['image2'],
-        description: each['description'],
+        user_id: each['user_id'],
+        Name: each['Name'],
+        reg_no: each['reg_no'],
+        Contact: each['Contact'],
+        location: each['location'],
       );
-      abortion.add(abDetails);
+      staffsRegs.add(abDetails);
     }
-    return abortion;
+    return staffsRegs;
   }
+
+  Future<List<VolunteerReg>> VolResgis() async {
+    var data = await http.get(
+      "$BASE_URL/api/ViewVolunteerRegistration",
+    );
+
+    var jsonData = json.decode((data.body));
+    print(jsonData);
+    List<VolunteerReg> volsRegs = [];
+    for (var each in jsonData) {
+      VolunteerReg abDetails = VolunteerReg(
+        user_id: each['user_id'],
+        Name: each['Name'],
+        reg_no: each['reg_no'],
+        contact: each['Contact'],
+        location: each['location'],
+      );
+      volsRegs.add(abDetails);
+    }
+    return volsRegs;
+  }
+
+
+
 
   Future<String> insertSexEducation(String topic, String article1, String date,
       String image1, String article2, image2) async {
@@ -219,6 +246,14 @@ class DatabaseService {
     return data.statusCode;
   }
 
+  
+  Future<int> deletepres(int I_id) async {
+    var data = await http.get(
+      "$BASE_URL/api/deletepres?I_id=${I_id}",
+    );
+    return data.statusCode;
+  }
+
   Future<int> deletestaff(int id) async {
     //var encodeduuid = Uri.encodeComponent(uuid)c
     //var encodeProduct_id = Uri.encodeComponent(product_id);
@@ -228,7 +263,7 @@ class DatabaseService {
     return data.statusCode;
   }
 
-  Future<int> deleteMedicalItems(String id) async {
+  Future<int> deleteMedicalItems(int id) async {
     //var encodeduuid = Uri.encodeComponent(uuid)c
     //var encodeProduct_id = Uri.encodeComponent(product_id);
     var data = await http.get(
@@ -308,6 +343,7 @@ class DatabaseService {
     return feedbacksList;
   }
 
+
   Future<List<Invitation>> invitations() async {
     var data = await http.get(
       "$BASE_URL/api/invitations",
@@ -326,6 +362,28 @@ class DatabaseService {
       invitationList.add(invitationDetails);
     }
     return invitationList;
+  }
+
+
+
+  Future<List<Prescriptions>> viewPrescription() async {
+    var data = await http.get(
+      "$BASE_URL/api/prescriptions",
+    );
+
+    var jsonData = json.decode((data.body));
+
+    List<Prescriptions> PrescriptionsList = [];
+    for (var each in jsonData) {
+      Prescriptions PrescriptionsDetails = Prescriptions(
+          Pres_id: each['Pres_id'],
+          user_id: each['user_id'],
+          contact: each['contact'],
+          imgUrl: each['imgUrl'],
+          description: each['description']);
+      PrescriptionsList.add(PrescriptionsDetails);
+    }
+    return PrescriptionsList;
   }
 
 
