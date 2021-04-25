@@ -113,9 +113,31 @@ class _medicalItemListState extends State<medicalItemList> {
                                 child: Text("Delete"),
                                 color: Colors.orange,
                                 onPressed: () async {
-                                  var res = await db.deleteMedicalItems(
-                                      medicalItemList[index].itm_id);
-                                },
+                                  if (medicalItemList[index].itm_id == '') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                          title: Text("user Id is absense")),
+                                    );
+                                  } else {
+                                    var res = await db.deleteMedicalItems(
+                                       medicalItemList[index].itm_id);
+                                    print("${res}ressss");
+
+                                    if (res == 200) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            title: Text("Successfully deleted ")),
+                                      );
+
+                                      print("success");
+                                    } else {
+                                      print("failure");
+                                    }
+                                  }
+                                }
+                                
                               ),
                             ),
                             Divider(

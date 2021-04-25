@@ -96,10 +96,31 @@ class _viewMedicineOrdersState extends State<viewMedicineOrders> {
                                 child: RaisedButton(
                                     child: Text("Delete"),
                                     color: Colors.orange,
-                                    onPressed: () async {
-                                      var res = await db.deleteMedicineOrder(
-                                          medicineorderList[index].order_id);
-                                    }),
+                                         onPressed: () async {
+                                  if (medicineorderList[index].user_id == '') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                          title: Text("user Id is absense")),
+                                    );
+                                  } else {
+                                    var res = await db.deleteMedicineOrder(
+                                       medicineorderList[index].med_id);
+                                    print("${res}ressss");
+
+                                    if (res == 200) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            title: Text("Successfully deleted ")),
+                                      );
+
+                                      print("success");
+                                    } else {
+                                      print("failure");
+                                    }
+                                  }
+                                }),
                               ),
                               Divider(
                                 color: Colors.greenAccent,

@@ -1,3 +1,4 @@
+import 'package:drmobileadmin/constant.dart';
 import 'package:drmobileadmin/database.dart';
 import 'package:drmobileadmin/module/Feedback.dart';
 import 'package:drmobileadmin/module/Medicine.dart';
@@ -96,10 +97,31 @@ class _feedbackPageState extends State<feedbackPage> {
                                 child: RaisedButton(
                                     child: Text("Delete"),
                                     color: Colors.orange,
-                                    onPressed: () async {
-                                      var res = await db.deleteFeedback(
-                                          feedbackList[index].UID);
-                                    }),
+                                   onPressed: () async {
+                                  if (feedbackList[index].UID == '') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                          title: Text("user Id is absense")),
+                                    );
+                                  } else {
+                                    var res = await db.deletestaffsReg(
+                                       userid);
+                                    print("${res}ressss");
+
+                                    if (res == 200) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            title: Text("Successfully deleted ")),
+                                      );
+
+                                      print("success");
+                                    } else {
+                                      print("failure");
+                                    }
+                                  }
+                                },),
                               ),
                               Divider(
                                 color: Colors.greenAccent,

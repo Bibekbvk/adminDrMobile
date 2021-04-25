@@ -92,8 +92,30 @@ class _viewStaffRegistrationState extends State<viewStaffRegistration> {
                               child: RaisedButton(
                                 child: Text("Delete"),
                                 color: Colors.orange,
-                                onPressed: () {
-                                  //print("Name:${medList[index].generic_name}");
+                                onPressed: () async {
+                                  if (staffsReg[index].user_id == '') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                          title: Text("user Id is absense")),
+                                    );
+                                  } else {
+                                    var res = await db.deletestaffsReg(
+                                       staffsReg[index].user_id);
+                                    print("${res}ressss");
+
+                                    if (res == 200) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            title: Text("Successfully deleted ")),
+                                      );
+
+                                      print("success");
+                                    } else {
+                                      print("failure");
+                                    }
+                                  }
                                 },
                               ),
                             ),

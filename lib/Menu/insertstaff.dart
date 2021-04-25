@@ -119,7 +119,7 @@ class _insertStaffState extends State<insertStaff> {
                     } else {
                       var res = await db.insertstaff(
                            name.text, stafftype.text, location.text, fee.text, reg_no.text, image.text);
-
+                            print(res);
                             if(res==200){
                           _showDialogEmptyinsertStaff("Successfully Inserted staff");
 

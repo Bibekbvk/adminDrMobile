@@ -93,8 +93,30 @@ class _viewvolunteerRegistrationState extends State<viewvolunteerRegistration> {
                               child: RaisedButton(
                                 child: Text("Delete"),
                                 color: Colors.orange,
-                                onPressed: () {
-                                  //print("Name:${medList[index].generic_name}");
+                                 onPressed: () async {
+                                  if (volunteerReg[index].user_id == '') {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                          title: Text("user Id is absense")),
+                                    );
+                                  } else {
+                                    var res = await db.deleteVolunterReg(
+                                       volunteerReg[index].vr_id);
+                                    print("${res}ressss");
+
+                                    if (res == 200) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                            title: Text("Successfully deleted ")),
+                                      );
+
+                                      print("success");
+                                    } else {
+                                      print("failure");
+                                    }
+                                  }
                                 },
                               ),
                             ),

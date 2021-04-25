@@ -109,8 +109,9 @@ class _insertAbortionState extends State<insertAbortion> {
                         contact.text == '' ||
                         details.text == '' ||
                         images.text == '') {
-                      _showDialogEmptyinsertAbortion();
+                      _showDialogEmptyinsertAbortion("Some field are empty");
                     } else {
+                     
                       var res = await db.insertabortion(
                           "ID",
                           name.text,
@@ -118,6 +119,17 @@ class _insertAbortionState extends State<insertAbortion> {
                           contact.text,
                           details.text,
                           images.text);
+                         
+                          print(res);
+                            if(res==200){
+                          _showDialogEmptyinsertAbortion("Successfully Inserted staff");
+                            }else{
+                           
+                            _showDialogEmptyinsertAbortion("Something Went Wrong");
+
+                            }
+
+                          
                     }
                   })
             ],
@@ -125,7 +137,7 @@ class _insertAbortionState extends State<insertAbortion> {
         ]));
   }
 
-  _showDialogEmptyinsertAbortion() {
+  _showDialogEmptyinsertAbortion(String Message) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -136,7 +148,7 @@ class _insertAbortionState extends State<insertAbortion> {
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           content: new Text(
-            "Some Fields are empty",
+            "$Message",
             style: TextStyle(color: Colors.purple[400], fontSize: 14),
           ),
           actions: <Widget>[

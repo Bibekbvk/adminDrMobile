@@ -50,14 +50,14 @@ class DatabaseService {
     print(jsonData);
     List<VolunteerReg> volsRegs = [];
     for (var each in jsonData) {
-      VolunteerReg abDetails = VolunteerReg(
+      VolunteerReg volsRegsDetails = VolunteerReg(
         user_id: each['user_id'],
         Name: each['Name'],
         reg_no: each['reg_no'],
         contact: each['Contact'],
         location: each['location'],
       );
-      volsRegs.add(abDetails);
+      volsRegs.add(volsRegsDetails);
     }
     return volsRegs;
   }
@@ -115,21 +115,18 @@ class DatabaseService {
     return val;
   }
 
-  Future<String> insertstaff(String name, String staffType, String location,
+  Future<int> insertstaff(String name, String staffType, String location,
       String fee, String reg_no, String photo) async {
     //var encodeduuid = Uri.encodeComponent(uuid)c
     //var encodeProduct_id = Uri.encodeComponent(product_id);
     var data = await http.get(
-      "$BASE_URL/api/insertstaff?Name=${name}&staff_type=${staffType}&location=${location}&fee=${fee}&reg_no=${reg_no}&photo=${photo}",
+      "$BASE_URL/api/insertstaff?name=${name}&staff_type=${staffType}&location=${location}&fee=${fee}&reg_no=${reg_no}&photo=${photo}",
     );
-    print(data.body);
-    var jsonData = json.decode((data.body));
-    String val = jsonData["error"];
-    if (val == null) {
-      val = "";
-    }
-    print(val);
-    return val;
+    print("${data.statusCode}+codeeeeeeee");
+
+    
+  
+    return data.statusCode;
   }
 
   Future<int> insertVolunteer(
@@ -280,6 +277,36 @@ class DatabaseService {
     );
     return data.statusCode;
   }
+
+
+    Future<int> deleteVolunterReg(int id) async {
+    //var encodeduuid = Uri.encodeComponent(uuid)c
+    //var encodeProduct_id = Uri.encodeComponent(product_id);
+    var data = await http.get(
+      "$BASE_URL/api/deleteVolunterReg?vr_id=${id}",
+    );
+    return data.statusCode;
+  }
+
+    Future<int> deletestaffsReg(int id) async {
+    //var encodeduuid = Uri.encodeComponent(uuid)c
+    //var encodeProduct_id = Uri.encodeComponent(product_id);
+    var data = await http.get(
+      "$BASE_URL/api/deletestaffsReg?user_id=${id}",
+    );
+    return data.statusCode;
+  }
+
+  Future<int> staffregistration(int id) async {
+    //var encodeduuid = Uri.encodeComponent(uuid)c
+    //var encodeProduct_id = Uri.encodeComponent(product_id);
+    var data = await http.get(
+      "$BASE_URL/api/staffregistration?user_id=${id}",
+    );
+    return data.statusCode;
+  }
+
+
 
   Future<int> deleteVolunteer(String id) async {
     //var encodeduuid = Uri.encodeComponent(uuid)c
